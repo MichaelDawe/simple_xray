@@ -1,3 +1,13 @@
+minetest.register_on_mods_loaded(function ()
+	for i, def in pairs(minetest.registered_nodes) do
+		local groups = def.groups and table.copy(def.groups)
+		if groups then
+			groups.falling_node = 0
+			minetest.override_item(i, { groups = groups })
+		end
+	end
+end)
+
 minetest.register_node(":default:stone", {
 	description = ("Stone"),
 	tiles = {"default_stone.png"},
